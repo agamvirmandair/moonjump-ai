@@ -1,0 +1,7 @@
+Agent1:
+  lr: 0.0003
+  gamma: 0.99
+  rollout_len: 2048
+  minibatch_size: 64
+  eps: 0.2
+  update_epochs: 10
