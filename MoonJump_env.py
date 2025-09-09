@@ -42,9 +42,9 @@ class MoonJumpEnv(gym.Env):
             self.clock = pygame.time.Clock()
         else:
             self.screen = pygame.Surface((WIDTH, HEIGHT))
-        self.robot_img = pygame.transform.smoothscale(pygame.image.load('Robot.png'), (100, 250))
-        self.obstacle_variants = [pygame.transform.smoothscale(pygame.image.load('Obstacle1.png'), TALL_OBSTACLE_DIM),
-                             pygame.transform.smoothscale(pygame.image.load('Obstacle2.png'), SHORT_OBSTACLE_DIM)]
+        self.robot_img = pygame.transform.smoothscale(pygame.image.load('assets/Robot.png'), (100, 250))
+        self.obstacle_variants = [pygame.transform.smoothscale(pygame.image.load('assets/Obstacle1.png'), TALL_OBSTACLE_DIM),
+                             pygame.transform.smoothscale(pygame.image.load('assets/Obstacle2.png'), SHORT_OBSTACLE_DIM)]
         
         self.action_space = gym.spaces.Discrete(2)
 
@@ -93,7 +93,7 @@ class MoonJumpEnv(gym.Env):
                 self.update_craters()
                 pygame.display.flip()
         terminated = not self.active
-        truncated = False
+        truncated = False if self.score <= 500 else True
 
         reward = 0.1 + 0.01*self.score
         if action == 1 and prev_score == self.score: 
